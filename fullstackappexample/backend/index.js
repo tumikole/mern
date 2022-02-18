@@ -3,10 +3,10 @@ const app = express();
 require('dotenv').config()
 const {books} = require('./routes/books')
 const mongoose = require("mongoose")
+cors = require("cors")
 
 
-
-
+app.use(cors())
 mongoose.connect(
     process.env.DATABASE_SERVER,
   ).then(res => console.log('("i am connected to mangoDB")')).catch(err => console.log(err))
