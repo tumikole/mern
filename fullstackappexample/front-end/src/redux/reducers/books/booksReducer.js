@@ -20,10 +20,15 @@ export const booksReducer = (state = initialState, action) => {
           books: [...state.books, action.payload]
         };
         case actions.GET_SINGLE_BOOK:
-          // console.log('action' , action.payload)
           return {
             ...state,
             bookToBeEdited: action.payload
+          };
+          case actions.DELETE_BOOK:
+            const newBooks = state.books.filter(book => book._id !== action.payload)
+          return {
+            ...state,
+            books:newBooks
           };
           
     default:

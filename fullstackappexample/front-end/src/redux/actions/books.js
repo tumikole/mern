@@ -29,6 +29,16 @@ export const updateBook = (book , navigate) => {
   };
 };
 
+export const deleteBook = (id , navigate) => {
+  return async (dispatch) => {
+    await axios.delete(`http://localhost:4000/books/${id}`);
+    dispatch({ type: actions.DELETE_BOOK,
+      payload: id
+    });
+    // navigate('/')
+  };
+};
+
 export const getSingleBook = (id, navigate) => {
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:4000/books/${id}`);

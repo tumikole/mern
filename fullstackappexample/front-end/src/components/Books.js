@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooks, addBook ,getSingleBook} from "../redux/actions/books";
+import { getBooks, deleteBook , addBook ,getSingleBook} from "../redux/actions/books";
 import {useNavigate} from 'react-router-dom'
 
 
@@ -23,8 +23,12 @@ function Books() {
   };
 
   const editBook = (id) => {
-      console.log("id id id" , id)
     dispatch(getSingleBook(id ,navigate))
+
+  }
+
+  const deleteBookSelected = (id) => {
+    dispatch(deleteBook(id))
 
   }
 
@@ -40,6 +44,7 @@ function Books() {
             {" "}
             title : {book.title} description : {book.description}
             <button onClick={() => editBook(book._id)}>edit </button>
+            <button onClick={() => deleteBookSelected(book._id)}>X </button>
           </li>{" "}
         </ul>
       ))}
