@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config()
 const {books} = require('./routes/books')
+const {students} = require("./routes/auth")
 const mongoose = require("mongoose")
 cors = require("cors")
 
@@ -13,7 +14,7 @@ mongoose.connect(
 
 app.use(express.json())
 books(app)
-// console.log(book)
+students(app)
 
 
  app.listen(process.env.PORT,() =>  {
