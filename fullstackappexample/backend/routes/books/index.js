@@ -1,7 +1,9 @@
 const Books = require('../../models/books')
+const {validateToken} = require("../../security/tokenHelper")
+
 
 const books = (app) => {
-    app.get('/books' , async (req ,res) =>  {
+    app.get('/books' , validateToken,  async (req ,res) =>  {
         try{
             const books = await Books.find()
             res.send(books)
