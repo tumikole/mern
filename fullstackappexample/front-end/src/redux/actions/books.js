@@ -1,10 +1,16 @@
 import axios from "axios";
 import * as actions from "../actionTypes/index";
 
+// const token = 
+
 export const getBooks = () => {
+  let token = localStorage.getItem('token');
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:4000/books");
+      const response = await axios.get("http://localhost:4000/books" , {
+        headers:{Authorization : token}
+      });
+
       const books = response.data;
       dispatch({ type: actions.SAVE_BOOKS, payload: books });
     } catch (e) {

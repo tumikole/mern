@@ -2,12 +2,12 @@ const Students = require('../../models/students')
 const {createToken} = require('../../security/tokenHelper')
 const {hashPassword , comparePassword} = require('../../security/passwordHelper');
 const students = (app) => {
-    app.post('/sign-in' , async (req ,res) =>  {
+    app.post('/sign-up' , async (req ,res) =>  {
         const {email , password} = req.body
         try{ 
             const foundUser = await Students.findOne({email : email})
             if(foundUser !== null){
-                return res.status(400).send({error: "email already exists"})
+                return res.send({token: null , error: "email already exists"})
             }
 
             const hashedPassword = await hashPassword(password)            
@@ -15,7 +15,7 @@ const students = (app) => {
             const record = await student.save() 
             const token = createToken(record)
 
-            res.send({token})
+            return res.send({error: null , token: token})
         }catch(err){
             console.log(err)
         }
@@ -45,8 +45,6 @@ const students = (app) => {
             console.log(err)
         }
     })
-
-
 }
 
 

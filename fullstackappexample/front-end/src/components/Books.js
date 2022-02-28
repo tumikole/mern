@@ -8,11 +8,13 @@ import {useNavigate} from 'react-router-dom'
 function Books() {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.books.books);
-  const [book, setBook] = useState({ title: "", description: "" });
+  const state = useSelector((state) => state)
+  const [book, setBook] = useState({ title: "", description: "" });  
   const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getBooks());
+    console.log("state" , state)
   }, []);
 
   const handleSubmit = (e) => {
@@ -37,6 +39,7 @@ function Books() {
   };
   return (
     <div className="Books">
+      {state.auth.user.email}
       {books.map((book) => (
         <ul>
           {" "}
